@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_img"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diseases and Symptoms"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textColor="@android:color/white"/>
+
+
+    <Button
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="Start Test"
+        android:backgroundTint="#3B88C3"
+        android:textColor="@android:color/white"
+        app:iconTint="@android:color/white"
+        android:textSize="30sp"
+        app:icon="@drawable/test"
+        app:iconSize="40sp"/>
+</LinearLayout>
