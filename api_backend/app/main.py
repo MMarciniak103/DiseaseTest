@@ -47,9 +47,7 @@ async def get_quiz_symptoms(disease : str):
         false_symptoms.append(rnd_symptom)
         i += 1
 
-    return {"true_symptoms":true_symptoms,
-            "false_symptoms":false_symptoms,
-            "true_num":len(true_symptoms),
-            "false_num":len(false_symptoms)}
+    return {"trueSymptoms":true_symptoms,
+            "falseSymptoms":false_symptoms}
 
 
