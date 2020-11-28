@@ -21,7 +21,7 @@ async def main():
 
 @app.get("/diseases")
 async def get_diseases():
-    return {"diseases":list(diseases)}
+    return list(diseases)
 
 @app.get("/symptoms")
 async def get_all_symptoms():

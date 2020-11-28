@@ -9,42 +9,57 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="35dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="20dp">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:contentDescription="medical icon"
                 android:src="@drawable/hospital"
                 app:tint="#3B88C3" />
 
             <TextView
+                android:id="@+id/disease_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select symptoms of given disease:\nDISEASE1"
+                android:text="Select symptoms of given disease:\nAWEFAEWF DISEASE1AAAAAAAAAAAAAAA"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <ImageView
+                android:layout_marginStart="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="help icon"
+                android:layout_gravity="right"
+                android:src="@drawable/info"
+                app:tint="@android:color/white" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/outlinedButton"
+            style="@style/AppTheme.RoundedCornerMaterialButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/white"
             android:backgroundTint="#3B88C3"
-            style="@style/AppTheme.RoundedCornerMaterialButton"
-            android:text="CONFIRM"/>
+            android:text="CONFIRM"
+            android:textColor="@android:color/white" />
 
         <GridLayout
             android:layout_width="match_parent"
@@ -52,8 +67,8 @@
             android:alignmentMode="alignMargins"
             android:columnCount="2"
             android:columnOrderPreserved="false"
-            android:rowCount="5"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:rowCount="5">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -71,14 +86,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -114,14 +131,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -157,14 +176,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -200,14 +221,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -243,14 +266,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -286,14 +311,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -329,14 +356,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -372,14 +401,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -415,14 +446,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -458,14 +491,16 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
+
                     <ImageView
-                        android:layout_gravity="end"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"
                         android:contentDescription="info icon"
                         android:src="@drawable/info"
                         app:tint="#3B88C3" />
+
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
