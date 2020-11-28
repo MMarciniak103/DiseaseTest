@@ -30,9 +30,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Predict disease based on given symptoms:"
+                android:text="Select symptoms of given disease:\nDISEASE1"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
         <Button
@@ -43,7 +44,7 @@
             android:textColor="@android:color/white"
             android:backgroundTint="#3B88C3"
             style="@style/AppTheme.RoundedCornerMaterialButton"
-            android:text="Ready"/>
+            android:text="CONFIRM"/>
 
         <GridLayout
             android:layout_width="match_parent"
@@ -51,7 +52,8 @@
             android:alignmentMode="alignMargins"
             android:columnCount="2"
             android:columnOrderPreserved="false"
-            android:rowCount="5">
+            android:rowCount="5"
+            android:paddingBottom="10dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -69,7 +71,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -105,7 +114,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -141,7 +157,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -177,7 +200,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -213,7 +243,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -249,7 +286,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -285,7 +329,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -321,7 +372,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -357,7 +415,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -393,7 +458,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp">
-
+                    <ImageView
+                        android:layout_gravity="end"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="info icon"
+                        android:src="@drawable/info"
+                        app:tint="#3B88C3" />
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
