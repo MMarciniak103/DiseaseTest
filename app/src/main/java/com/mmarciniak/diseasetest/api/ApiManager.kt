@@ -12,7 +12,6 @@ open class ApiManager {
             override fun onResponse(call: Call, response: Response) {
                 onResponse(call, response)
             }
-
             override fun onFailure(call: Call, e: IOException) {
                 onFailure(call, e)
             }

@@ -8,11 +8,11 @@ import kotlinx.android.synthetic.main.activity_test.*
 import java.io.IOException
 
 class TestActivity : AppCompatActivity() {
+    private val apiManager = DiseaseApiManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        val apiManager = DiseaseApiManager()
-
         try {
             apiManager.getListOfDiseases(::chooseRandomDisease)
         }
@@ -29,10 +29,16 @@ class TestActivity : AppCompatActivity() {
 
         val randomDisease = diseases.random()
         val displayText = "Select symptoms of given disease:\n $randomDisease"
-
+        apiManager.selectedDisease = randomDisease
+        apiManager.getRandomQuestion(::populateTestView,randomDisease)
         runOnUiThread() {
             disease_tv.text = displayText
         }
+    }
+
+    private fun populateTestView(jsonBody: String)
+    {
+        
     }
 
 }
