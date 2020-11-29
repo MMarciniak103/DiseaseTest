@@ -15,7 +15,7 @@ import java.io.IOException
 import java.util.*
 
 
-class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener {
+class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener, OnQuizCompleteListener{
     private val apiManager = DiseaseApiManager()
     private val selectedTiles = mutableListOf<Int>()
     private var trueIds: List<Int> = emptyList()
@@ -141,7 +141,25 @@ class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener {
         dialog.show(supportFragmentManager, "quizResultDialog")
     }
 
+    private fun resetQuiz() {
+        selectedTiles.clear()
+        trueIds = emptyList()
+        shuffledSymptoms = emptyList()
+
+        try {
+            apiManager.getListOfDiseases(::chooseRandomDisease)
+        } catch (e: IOException) {
+            println(e.printStackTrace())
+        }
+    }
+
     override fun onDismiss(p0: DialogInterface?) {
         finish()
     }
+
+    override fun onComplete(reset: Boolean) {
+        if(reset) resetQuiz()
+    }
+
+
 }

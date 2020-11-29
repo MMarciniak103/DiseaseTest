@@ -1,6 +1,7 @@
 package com.mmarciniak.diseasetest
 
 import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ class QuizResultDialogFragment : DialogFragment() {
 
     private var scoreValue: Int = 0
     private var closeActivity: Boolean = false
+    private lateinit var mListener: OnQuizCompleteListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +36,24 @@ class QuizResultDialogFragment : DialogFragment() {
             dismiss()
         }
 
-        rootView.no_button.setOnClickListener {
+        rootView.yes_button.setOnClickListener {
             closeActivity = false
+            mListener.onComplete(true)
             dismiss()
         }
 
         return rootView
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            mListener = activity as OnQuizCompleteListener
+        }
+        catch (e: ClassCastException)
+        {
+            throw ClassCastException(activity.toString() + " must implement OnCompleteListener")
+        }
     }
 
     override fun onDismiss(dialog: DialogInterface) {
