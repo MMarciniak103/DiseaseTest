@@ -32,7 +32,11 @@ class TestActivity : AppCompatActivity() {
         val randomDisease = diseasesList.random()
         val displayText = "Select symptoms of given disease:\n $randomDisease"
         apiManager.selectedDisease = randomDisease
+        // get question for given disease
         apiManager.getRandomQuestion(::populateTestView, randomDisease)
+        // register handler for info icon that opens dialog with disease description
+        apiManager.getDiseaseDescription(::addDiseaseDescriptionHandler,randomDisease)
+
         runOnUiThread() {
             disease_tv.text = displayText
         }
@@ -80,4 +84,13 @@ class TestActivity : AppCompatActivity() {
         return symptoms
     }
 
+    private fun addDiseaseDescriptionHandler(diseaseDescription: String,diseaseName: String)
+    {
+        runOnUiThread {
+            diseaseDescription_info.setOnClickListener {
+                val dialog = CustomDialogFragment.newInstance(diseaseName,diseaseDescription)
+                dialog.show(supportFragmentManager,"customDialog")
+            }
+        }
+    }
 }

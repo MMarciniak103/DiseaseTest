@@ -5,7 +5,7 @@ data_path = os.path.join('./'+os.getcwd(),'data')
 
 def initialize():
     df = pd.read_csv(os.path.join(data_path, 'dataset.csv'))
-    diseases_description_df = pd.read_csv(os.path.join(data_path,'disease_description.csv'))
+    diseases_description_df = pd.read_csv(os.path.join(data_path,'disease_description.csv'),delimiter=";")
     # find all unique diseases
     diseases = get_unique_diseases(df)
     # get unique symptoms for diseases
@@ -21,9 +21,10 @@ def get_unique_diseases(df):
 def get_diseases_symptoms(df,diseases):
     diseases_symptoms = {}
     for disease in diseases:
+        disease = disease.strip()
         diseases_symptoms[disease] = set()
         for i in range(1, 18):
-            for symptom in df[df['Disease'] == disease][f"Symptom_{i}"].unique():
+            for symptom in df[df['Disease'].str.strip() == disease][f"Symptom_{i}"].unique():
                 if pd.isnull(symptom):
                     continue
                 diseases_symptoms[disease].add(symptom.strip())
