@@ -53,7 +53,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/outlinedButton"
+            android:id="@+id/submit_button"
             style="@style/AppTheme.RoundedCornerMaterialButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"

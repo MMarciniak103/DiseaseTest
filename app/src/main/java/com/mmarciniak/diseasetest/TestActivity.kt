@@ -17,7 +17,8 @@ import java.util.*
 class TestActivity : AppCompatActivity() {
     private val apiManager = DiseaseApiManager()
     private val selectedTiles = mutableListOf<Int>()
-    lateinit var trueIds: List<Int>
+    private var trueIds: List<Int> = emptyList()
+    private var shuffledSymptoms: List<QuestionData> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,10 @@ class TestActivity : AppCompatActivity() {
             apiManager.getListOfDiseases(::chooseRandomDisease)
         } catch (e: IOException) {
             println(e.printStackTrace())
+        }
+
+        submit_button.setOnClickListener {
+            submitTest()
         }
 
     }
@@ -50,7 +55,7 @@ class TestActivity : AppCompatActivity() {
         trueIds = questionDataContainer.trueSymptoms.indices.toList()
         val symptoms = createQuestionsData(questionDataContainer)
 
-        val shuffledSymptoms = symptoms.shuffled()
+        shuffledSymptoms = symptoms.shuffled()
 
         runOnUiThread() {
             // Iterate over grid view and handle events associated with child views
@@ -61,7 +66,7 @@ class TestActivity : AppCompatActivity() {
                 if (cardView is CardView) {
                     val llayout: View = cardView.getChildAt(0)
                     if (llayout is LinearLayout) {
-                        addCardViewOnClick(cardView,i, llayout,symptoms)
+                        addCardViewOnClick(cardView,i, llayout,shuffledSymptoms)
                         for (j in 0 until llayout.childCount) {
                             val cardContent: View = llayout.getChildAt(j)
                             if (cardContent is TextView) {
@@ -80,11 +85,11 @@ class TestActivity : AppCompatActivity() {
         cardView.setOnClickListener {
             // if cardview was selected -> unselect
             if (symptoms[i].id in selectedTiles) {
-                llayout.setBackgroundResource(R.drawable.border)
+                llayout.setBackgroundResource(0)
                 selectedTiles.remove(symptoms[i].id)
             } else {
                 // else if it was unselected -> select
-                llayout.setBackgroundResource(0)
+                llayout.setBackgroundResource(R.drawable.border)
                 selectedTiles.add(symptoms[i].id)
             }
             println("SELECTED TILES $selectedTiles")
@@ -115,13 +120,21 @@ class TestActivity : AppCompatActivity() {
 
     private fun submitTest() {
         var correctNums = 0
-        // check how many true symptoms were selected
-        trueIds.forEach {
-            if (it in selectedTiles) {
+
+        shuffledSymptoms.forEach {
+            print(it)
+            if(it.id in trueIds && it.id in selectedTiles)
+            {
+                correctNums++
+            }
+            else if(it.id !in trueIds && it.id !in selectedTiles)
+            {
                 correctNums++
             }
         }
-
+        println("CORRECT SYMP: $trueIds")
+        println("SELECTED : $selectedTiles")
+        println("CORRECT : $correctNums")
 
     }
 }
