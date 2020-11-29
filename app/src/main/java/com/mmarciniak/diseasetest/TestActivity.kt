@@ -16,6 +16,8 @@ import java.util.*
 
 class TestActivity : AppCompatActivity() {
     private val apiManager = DiseaseApiManager()
+    private val selectedTiles = mutableListOf<Int>()
+    lateinit var trueIds: List<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,7 @@ class TestActivity : AppCompatActivity() {
         // get question for given disease
         apiManager.getRandomQuestion(::populateTestView, randomDisease)
         // register handler for info icon that opens dialog with disease description
-        apiManager.getDiseaseDescription(::addDiseaseDescriptionHandler,randomDisease)
+        apiManager.getDiseaseDescription(::addDiseaseDescriptionHandler, randomDisease)
 
         runOnUiThread() {
             disease_tv.text = displayText
@@ -45,30 +47,47 @@ class TestActivity : AppCompatActivity() {
     private fun populateTestView(questionDataContainer: QuestionDataContainer) {
         println(Arrays.toString(questionDataContainer.falseSymptoms))
         println(Arrays.toString(questionDataContainer.trueSymptoms))
-        val trueIds = questionDataContainer.trueSymptoms.indices
+        trueIds = questionDataContainer.trueSymptoms.indices.toList()
         val symptoms = createQuestionsData(questionDataContainer)
 
         val shuffledSymptoms = symptoms.shuffled()
 
         runOnUiThread() {
+            // Iterate over grid view and handle events associated with child views
+            // Its structure is in form: grid view -> card views -> linear layout -> [ image view, image view, text view]
             var k = 0
             for (i in 0 until test_grid.childCount) {
-                val v: View = test_grid.getChildAt(i)
-                if (v is CardView) {
-                    val llayout: View = v.getChildAt(0)
+                val cardView: View = test_grid.getChildAt(i)
+                if (cardView is CardView) {
+                    val llayout: View = cardView.getChildAt(0)
                     if (llayout is LinearLayout) {
+                        addCardViewOnClick(cardView,i, llayout,symptoms)
                         for (j in 0 until llayout.childCount) {
                             val cardContent: View = llayout.getChildAt(j)
                             if (cardContent is TextView) {
 
-                                cardContent.text = shuffledSymptoms[k].symptom.replace("_"," ")
+                                cardContent.text = shuffledSymptoms[k].symptom.replace("_", " ")
                                 k++
                             }
                         }
                     }
-
                 }
             }
+        }
+    }
+
+    private fun addCardViewOnClick(cardView: View, i: Int, llayout: View,symptoms: List<QuestionData>) {
+        cardView.setOnClickListener {
+            // if cardview was selected -> unselect
+            if (symptoms[i].id in selectedTiles) {
+                llayout.setBackgroundResource(R.drawable.border)
+                selectedTiles.remove(symptoms[i].id)
+            } else {
+                // else if it was unselected -> select
+                llayout.setBackgroundResource(0)
+                selectedTiles.add(symptoms[i].id)
+            }
+            println("SELECTED TILES $selectedTiles")
         }
     }
 
@@ -84,13 +103,25 @@ class TestActivity : AppCompatActivity() {
         return symptoms
     }
 
-    private fun addDiseaseDescriptionHandler(diseaseDescription: String,diseaseName: String)
-    {
+    private fun addDiseaseDescriptionHandler(diseaseDescription: String, diseaseName: String) {
         runOnUiThread {
             diseaseDescription_info.setOnClickListener {
-                val dialog = CustomDialogFragment.newInstance(diseaseName,diseaseDescription)
-                dialog.show(supportFragmentManager,"customDialog")
+                val dialog = CustomDialogFragment.newInstance(diseaseName, diseaseDescription)
+                dialog.show(supportFragmentManager, "customDialog")
             }
         }
+    }
+
+
+    private fun submitTest() {
+        var correctNums = 0
+        // check how many true symptoms were selected
+        trueIds.forEach {
+            if (it in selectedTiles) {
+                correctNums++
+            }
+        }
+
+
     }
 }

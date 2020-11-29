@@ -79,6 +79,7 @@
                 android:layout_columnWeight="1"
                 android:layout_margin="12dp"
                 android:backgroundTint="@android:color/white"
+
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp">
 
@@ -115,6 +116,7 @@
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
