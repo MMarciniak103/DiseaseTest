@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.activity_test.view.*
 import kotlinx.android.synthetic.main.disease_description_dialog.view.*
 import java.lang.IllegalStateException
 
-class CustomDialogFragment : DialogFragment() {
+class DiseaseInfoDialogFragment : DialogFragment() {
 
     private lateinit var diseaseName: String
     private lateinit var diseaseContent: String
@@ -41,8 +40,8 @@ class CustomDialogFragment : DialogFragment() {
         private const val diseaseNameKey = "diseaseName"
         private const val diseaseContentKey = "diseaseContentKey"
         @JvmStatic
-        fun newInstance(diseaseName: String, diseaseContent: String): CustomDialogFragment =
-            CustomDialogFragment().apply {
+        fun newInstance(diseaseName: String, diseaseContent: String): DiseaseInfoDialogFragment =
+            DiseaseInfoDialogFragment().apply {
                 arguments = Bundle().apply {
                     putString(diseaseNameKey, diseaseName)
                     putString(diseaseContentKey, diseaseContent)

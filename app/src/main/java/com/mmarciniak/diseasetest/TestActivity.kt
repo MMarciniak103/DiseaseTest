@@ -1,5 +1,6 @@
 package com.mmarciniak.diseasetest
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -14,7 +15,7 @@ import java.io.IOException
 import java.util.*
 
 
-class TestActivity : AppCompatActivity() {
+class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener {
     private val apiManager = DiseaseApiManager()
     private val selectedTiles = mutableListOf<Int>()
     private var trueIds: List<Int> = emptyList()
@@ -111,7 +112,7 @@ class TestActivity : AppCompatActivity() {
     private fun addDiseaseDescriptionHandler(diseaseDescription: String, diseaseName: String) {
         runOnUiThread {
             diseaseDescription_info.setOnClickListener {
-                val dialog = CustomDialogFragment.newInstance(diseaseName, diseaseDescription)
+                val dialog = DiseaseInfoDialogFragment.newInstance(diseaseName, diseaseDescription)
                 dialog.show(supportFragmentManager, "customDialog")
             }
         }
@@ -136,5 +137,11 @@ class TestActivity : AppCompatActivity() {
         println("SELECTED : $selectedTiles")
         println("CORRECT : $correctNums")
 
+        val dialog = QuizResultDialogFragment.newInstance(correctNums)
+        dialog.show(supportFragmentManager, "quizResultDialog")
+    }
+
+    override fun onDismiss(p0: DialogInterface?) {
+        finish()
     }
 }
