@@ -10,12 +10,16 @@ import androidx.cardview.widget.CardView
 import com.mmarciniak.diseasetest.api.DiseaseApiManager
 import com.mmarciniak.diseasetest.data.QuestionData
 import com.mmarciniak.diseasetest.data.QuestionDataContainer
+import com.mmarciniak.diseasetest.fragments.DiseaseInfoDialogFragment
+import com.mmarciniak.diseasetest.fragments.OnQuizCompleteListener
+import com.mmarciniak.diseasetest.fragments.QuizResultDialogFragment
 import kotlinx.android.synthetic.main.activity_test.*
 import java.io.IOException
 import java.util.*
 
 
-class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener, OnQuizCompleteListener{
+class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
+    OnQuizCompleteListener {
     private val apiManager = DiseaseApiManager()
     private val selectedTiles = mutableListOf<Int>()
     private var trueIds: List<Int> = emptyList()
@@ -67,7 +71,7 @@ class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener, On
                 if (cardView is CardView) {
                     val llayout: View = cardView.getChildAt(0)
                     if (llayout is LinearLayout) {
-                        addCardViewOnClick(cardView,i, llayout,shuffledSymptoms)
+                        addCardViewOnClick(cardView, i, llayout, shuffledSymptoms)
                         for (j in 0 until llayout.childCount) {
                             val cardContent: View = llayout.getChildAt(j)
                             if (cardContent is TextView) {
@@ -82,7 +86,12 @@ class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener, On
         }
     }
 
-    private fun addCardViewOnClick(cardView: View, i: Int, llayout: View,symptoms: List<QuestionData>) {
+    private fun addCardViewOnClick(
+        cardView: View,
+        i: Int,
+        llayout: View,
+        symptoms: List<QuestionData>
+    ) {
         cardView.setOnClickListener {
             // if cardview was selected -> unselect
             if (symptoms[i].id in selectedTiles) {
@@ -124,12 +133,9 @@ class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener, On
 
         shuffledSymptoms.forEach {
             print(it)
-            if(it.id in trueIds && it.id in selectedTiles)
-            {
+            if (it.id in trueIds && it.id in selectedTiles) {
                 correctNums++
-            }
-            else if(it.id !in trueIds && it.id !in selectedTiles)
-            {
+            } else if (it.id !in trueIds && it.id !in selectedTiles) {
                 correctNums++
             }
         }
@@ -145,11 +151,22 @@ class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener, On
         selectedTiles.clear()
         trueIds = emptyList()
         shuffledSymptoms = emptyList()
-
+        resetTilesSelection()
         try {
             apiManager.getListOfDiseases(::chooseRandomDisease)
         } catch (e: IOException) {
             println(e.printStackTrace())
+        }
+    }
+
+    private fun resetTilesSelection() {
+        for (i in 0 until test_grid.childCount) {
+            val cardView: View = test_grid.getChildAt(i)
+            if (cardView is CardView) {
+                val llayout: View = cardView.getChildAt(0)
+                if (llayout is LinearLayout)
+                    llayout.setBackgroundResource(0)
+            }
         }
     }
 
@@ -158,7 +175,7 @@ class TestActivity : AppCompatActivity() , DialogInterface.OnDismissListener, On
     }
 
     override fun onComplete(reset: Boolean) {
-        if(reset) resetQuiz()
+        if (reset) resetQuiz()
     }
 
 

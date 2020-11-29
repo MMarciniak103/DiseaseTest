@@ -1,10 +1,11 @@
-package com.mmarciniak.diseasetest
+package com.mmarciniak.diseasetest.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.mmarciniak.diseasetest.R
 import kotlinx.android.synthetic.main.disease_description_dialog.view.*
 import java.lang.IllegalStateException
 

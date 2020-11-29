@@ -1,4 +1,4 @@
-package com.mmarciniak.diseasetest
+package com.mmarciniak.diseasetest.fragments
 
 import android.app.Activity
 import android.content.Context
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.mmarciniak.diseasetest.R
 import kotlinx.android.synthetic.main.quiz_result_dialog.view.*
 
 
