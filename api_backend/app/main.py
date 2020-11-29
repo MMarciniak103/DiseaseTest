@@ -13,6 +13,7 @@ app = FastAPI()
 init_state = initialize()
 
 diseases,diseases_symptoms,all_symptoms = init_state[0],init_state[1],init_state[2]
+diseases_description_df = init_state[3]
 
 
 @app.get("/")
@@ -50,4 +51,7 @@ async def get_quiz_symptoms(disease : str):
     return {"trueSymptoms":true_symptoms,
             "falseSymptoms":false_symptoms}
 
-
+@app.get("/disease/description")
+async def get_disease_description(disease: str):
+    description = diseases_description_df[diseases_description_df['Disease']==disease]['Description'].values[0]
+    return description

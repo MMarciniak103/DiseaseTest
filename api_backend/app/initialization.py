@@ -5,6 +5,7 @@ data_path = os.path.join('./'+os.getcwd(),'data')
 
 def initialize():
     df = pd.read_csv(os.path.join(data_path, 'dataset.csv'))
+    diseases_description_df = pd.read_csv(os.path.join(data_path,'disease_description.csv'))
     # find all unique diseases
     diseases = get_unique_diseases(df)
     # get unique symptoms for diseases
@@ -12,7 +13,7 @@ def initialize():
     # get all symptoms
     all_symptoms = get_all_symptoms(df)
 
-    return [diseases,diseases_symptoms,all_symptoms]
+    return [diseases,diseases_symptoms,all_symptoms,diseases_description_df]
 
 def get_unique_diseases(df):
     return df['Disease'].unique()

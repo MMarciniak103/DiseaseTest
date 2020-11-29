@@ -57,7 +57,7 @@ class TestActivity : AppCompatActivity() {
                             val cardContent: View = llayout.getChildAt(j)
                             if (cardContent is TextView) {
 
-                                cardContent.text = shuffledSymptoms[k].symptom
+                                cardContent.text = shuffledSymptoms[k].symptom.replace("_"," ")
                                 k++
                             }
                         }
