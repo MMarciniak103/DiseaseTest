@@ -170,11 +170,11 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
                     llayout.setBackgroundResource(R.drawable.border)
                     if (shuffledSymptoms[i].id in trueIds) {
                         changeStrokeColor(llayout, getColor(R.color.correctAnswer))
-                        changeStatusIcon(llayout,R.drawable.checked)
+                        changeStatusIcon(llayout,R.drawable.checked,R.color.correctAnswer)
                     }
                     else {
                         changeStrokeColor(llayout, getColor(R.color.wrongAnswer))
-                        changeStatusIcon(llayout,R.drawable.close)
+                        changeStatusIcon(llayout,R.drawable.close,R.color.wrongAnswer)
                     }
                 }
             }
@@ -199,7 +199,11 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
             if (cardView is CardView) {
                 val llayout: View = cardView.getChildAt(0)
                 if (llayout is LinearLayout)
+                {
+                    changeStatusIcon(llayout,R.drawable.info,R.color.pastelBlue)
                     llayout.setBackgroundResource(0)
+                }
+
             }
         }
     }
@@ -214,11 +218,11 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
         backgroundGradient.setStroke(sp.toInt(), color)
     }
 
-    private fun changeStatusIcon(llayout: LinearLayout,icon: Int)
+    private fun changeStatusIcon(llayout: LinearLayout,icon: Int,color: Int)
     {
         val imageIcon = llayout.getChildAt(0) as ImageView
         imageIcon.setImageResource(icon)
-        val myColor = ContextCompat.getColor(applicationContext, R.color.correctAnswer);
+        val myColor = ContextCompat.getColor(applicationContext, color)
         ImageViewCompat.setImageTintList(imageIcon, ColorStateList.valueOf(myColor));
 
     }
