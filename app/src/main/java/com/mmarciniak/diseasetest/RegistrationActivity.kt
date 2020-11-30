@@ -4,14 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.register_view.*
+import kotlinx.android.synthetic.main.activity_register.*
 
 class RegistrationActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.register_view)
+        setContentView(R.layout.activity_register)
 
         auth = FirebaseAuth.getInstance()
 
@@ -36,6 +36,7 @@ class RegistrationActivity : AppCompatActivity() {
                     runOnUiThread{
                         Toast.makeText(this,"Account registered successfully",Toast.LENGTH_SHORT).show()
                     }
+                    finish()
                 }
                 else {
                     runOnUiThread{
