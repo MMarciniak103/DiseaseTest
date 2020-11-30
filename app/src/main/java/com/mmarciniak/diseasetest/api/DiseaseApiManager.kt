@@ -1,5 +1,6 @@
 package com.mmarciniak.diseasetest.api
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.mmarciniak.diseasetest.data.QuestionDataContainer
 import okhttp3.*
@@ -9,7 +10,7 @@ class DiseaseApiManager : ApiManager() {
     private val baseUrl = "http://192.168.0.196/"
 
     var selectedDisease: String? = null
-    val gson = GsonBuilder().create()
+    private val gson: Gson = GsonBuilder().create()
 
 
     fun getListOfDiseases(callback: (m: Array<String>) -> Unit) {

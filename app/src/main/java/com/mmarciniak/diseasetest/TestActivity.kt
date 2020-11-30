@@ -121,7 +121,8 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
     private fun addDiseaseDescriptionHandler(diseaseDescription: String, diseaseName: String) {
         runOnUiThread {
             diseaseDescription_info.setOnClickListener {
-                val dialog = DiseaseInfoDialogFragment.newInstance(diseaseName, diseaseDescription)
+                val displayText = "Disease: $diseaseName"
+                val dialog = DiseaseInfoDialogFragment.newInstance(displayText, diseaseDescription)
                 dialog.show(supportFragmentManager, "customDialog")
             }
         }
@@ -145,6 +146,10 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
 
         val dialog = QuizResultDialogFragment.newInstance(correctNums)
         dialog.show(supportFragmentManager, "quizResultDialog")
+    }
+
+    private fun showAnswers() {
+
     }
 
     private fun resetQuiz() {

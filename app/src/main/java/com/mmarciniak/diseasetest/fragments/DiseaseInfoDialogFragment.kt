@@ -26,8 +26,8 @@ class DiseaseInfoDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.disease_description_dialog, container, false)
-        val diseaseLabelText = "Disease: $diseaseName"
-        rootView.description_label.text = diseaseLabelText
+//        val diseaseLabelText = "Disease: $diseaseName"
+        rootView.description_label.text = diseaseName
         rootView.description_content.text = diseaseContent
 
         rootView.cancel_button.setOnClickListener {
