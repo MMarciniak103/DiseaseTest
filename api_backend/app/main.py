@@ -37,7 +37,7 @@ async def get_disease_symptoms(disease: str):
 async def get_quiz_symptoms(disease : str):
     disease = disease.strip()
     num_disease_symptoms = len(diseases_symptoms[disease])
-    num_of_true = random.randint(0, num_disease_symptoms)
+    num_of_true = random.randint(1, num_disease_symptoms)
     true_symptoms = random.sample(diseases_symptoms[disease],num_of_true)
     num_of_false = 10 - num_of_true
     all_symptoms_list = list(all_symptoms)
