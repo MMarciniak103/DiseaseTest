@@ -1,12 +1,22 @@
 package com.mmarciniak.diseasetest
 
 import android.content.DialogInterface
+import android.content.res.ColorStateList
+import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.ResourceManagerInternal
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.red
+import androidx.core.widget.ImageViewCompat
 import com.mmarciniak.diseasetest.api.DiseaseApiManager
 import com.mmarciniak.diseasetest.data.QuestionData
 import com.mmarciniak.diseasetest.data.QuestionDataContainer
@@ -28,12 +38,14 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+
         try {
             apiManager.getListOfDiseases(::chooseRandomDisease)
         } catch (e: IOException) {
             println(e.printStackTrace())
         }
 
+        submit_button.text = "CONFIRM"
         submit_button.setOnClickListener {
             submitTest()
         }
@@ -133,7 +145,7 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
         var correctNums = 0
 
         shuffledSymptoms.forEach {
-            print(it)
+            println(it)
             if (it.id in trueIds && it.id in selectedTiles) {
                 correctNums++
             } else if (it.id !in trueIds && it.id !in selectedTiles) {
@@ -149,7 +161,24 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
     }
 
     private fun showAnswers() {
-
+        for (i in 0 until test_grid.childCount) {
+            val cardView: View = test_grid.getChildAt(i)
+            if (cardView is CardView) {
+                val llayout: View = cardView.getChildAt(0)
+                if (llayout is LinearLayout)
+                {
+                    llayout.setBackgroundResource(R.drawable.border)
+                    if (shuffledSymptoms[i].id in trueIds) {
+                        changeStrokeColor(llayout, getColor(R.color.correctAnswer))
+                        changeStatusIcon(llayout,R.drawable.checked)
+                    }
+                    else {
+                        changeStrokeColor(llayout, getColor(R.color.wrongAnswer))
+                        changeStatusIcon(llayout,R.drawable.close)
+                    }
+                }
+            }
+        }
     }
 
     private fun resetQuiz() {
@@ -175,13 +204,42 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
         }
     }
 
+    private fun changeStrokeColor(view: View, color: Int) {
+        val backgroundGradient = view.background as GradientDrawable
+        val sp = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            5f,
+            resources.displayMetrics
+        )
+        backgroundGradient.setStroke(sp.toInt(), color)
+    }
+
+    private fun changeStatusIcon(llayout: LinearLayout,icon: Int)
+    {
+        val imageIcon = llayout.getChildAt(0) as ImageView
+        imageIcon.setImageResource(icon)
+        val myColor = ContextCompat.getColor(applicationContext, R.color.correctAnswer);
+        ImageViewCompat.setImageTintList(imageIcon, ColorStateList.valueOf(myColor));
+
+    }
+
     override fun onDismiss(p0: DialogInterface?) {
         finish()
     }
 
     override fun onComplete(reset: Boolean) {
         if (reset) resetQuiz()
+        else {
+            showAnswers()
+            submit_button.text = "RETRY"
+            submit_button.setOnClickListener{
+                resetQuiz()
+                submit_button.text = "CONFIRM"
+                submit_button.setOnClickListener{
+                    submitTest()
+                }
+            }
+        }
     }
-
 
 }

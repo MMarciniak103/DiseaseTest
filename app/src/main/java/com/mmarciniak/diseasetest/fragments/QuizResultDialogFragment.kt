@@ -32,11 +32,16 @@ class QuizResultDialogFragment : DialogFragment() {
         val quizStatusText = "Score: $scoreValue/10"
         rootView.quiz_result_label.text = quizStatusText
 
+        rootView.show_answers_button.setOnClickListener {
+            closeActivity = false
+            mListener.onComplete(false)
+            dismiss()
+        }
+
         rootView.no_button.setOnClickListener {
             closeActivity = true
             dismiss()
         }
-
         rootView.yes_button.setOnClickListener {
             closeActivity = false
             mListener.onComplete(true)
