@@ -11,10 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".RegistrationActivity"></activity>
         <activity
             android:name=".TestActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
