@@ -3,24 +3,21 @@ package com.mmarciniak.diseasetest
 import android.content.DialogInterface
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.ResourceManagerInternal
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.red
 import androidx.core.widget.ImageViewCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.mmarciniak.diseasetest.api.DiseaseApiManager
 import com.mmarciniak.diseasetest.data.QuestionData
 import com.mmarciniak.diseasetest.data.QuestionDataContainer
+import com.mmarciniak.diseasetest.data.StorageManager
 import com.mmarciniak.diseasetest.fragments.DiseaseInfoDialogFragment
 import com.mmarciniak.diseasetest.fragments.OnQuizCompleteListener
 import com.mmarciniak.diseasetest.fragments.QuizResultDialogFragment
@@ -163,8 +160,10 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
             val uid = it.uid
             val email = it.email
             if (email != null && apiManager.selectedDisease != null)
-                storageManager.saveUserScoreForDisease(uid,email,
-                    apiManager.selectedDisease!!,correctNums/10f)
+                storageManager.saveUserScoreForDisease(
+                    uid, email,
+                    apiManager.selectedDisease!!, correctNums / 10.toDouble()
+                )
         }
         val dialog = QuizResultDialogFragment.newInstance(correctNums)
         dialog.show(supportFragmentManager, "quizResultDialog")
@@ -175,16 +174,14 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
             val cardView: View = test_grid.getChildAt(i)
             if (cardView is CardView) {
                 val llayout: View = cardView.getChildAt(0)
-                if (llayout is LinearLayout)
-                {
+                if (llayout is LinearLayout) {
                     llayout.setBackgroundResource(R.drawable.border)
                     if (shuffledSymptoms[i].id in trueIds) {
                         changeStrokeColor(llayout, getColor(R.color.correctAnswer))
-                        changeStatusIcon(llayout,R.drawable.checked,R.color.correctAnswer)
-                    }
-                    else {
+                        changeStatusIcon(llayout, R.drawable.checked, R.color.correctAnswer)
+                    } else {
                         changeStrokeColor(llayout, getColor(R.color.wrongAnswer))
-                        changeStatusIcon(llayout,R.drawable.close,R.color.wrongAnswer)
+                        changeStatusIcon(llayout, R.drawable.close, R.color.wrongAnswer)
                     }
                 }
             }
@@ -208,9 +205,8 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
             val cardView: View = test_grid.getChildAt(i)
             if (cardView is CardView) {
                 val llayout: View = cardView.getChildAt(0)
-                if (llayout is LinearLayout)
-                {
-                    changeStatusIcon(llayout,R.drawable.info,R.color.pastelBlue)
+                if (llayout is LinearLayout) {
+                    changeStatusIcon(llayout, R.drawable.info, R.color.pastelBlue)
                     llayout.setBackgroundResource(0)
                 }
 
@@ -228,8 +224,7 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
         backgroundGradient.setStroke(sp.toInt(), color)
     }
 
-    private fun changeStatusIcon(llayout: LinearLayout,icon: Int,color: Int)
-    {
+    private fun changeStatusIcon(llayout: LinearLayout, icon: Int, color: Int) {
         val imageIcon = llayout.getChildAt(0) as ImageView
         imageIcon.setImageResource(icon)
         val myColor = ContextCompat.getColor(applicationContext, color)
@@ -246,10 +241,10 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
         else {
             showAnswers()
             submit_button.text = "RETRY"
-            submit_button.setOnClickListener{
+            submit_button.setOnClickListener {
                 resetQuiz()
                 submit_button.text = "CONFIRM"
-                submit_button.setOnClickListener{
+                submit_button.setOnClickListener {
                     submitTest()
                 }
             }
