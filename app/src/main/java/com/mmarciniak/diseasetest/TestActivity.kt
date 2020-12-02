@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.red
 import androidx.core.widget.ImageViewCompat
+import com.google.firebase.auth.FirebaseAuth
 import com.mmarciniak.diseasetest.api.DiseaseApiManager
 import com.mmarciniak.diseasetest.data.QuestionData
 import com.mmarciniak.diseasetest.data.QuestionDataContainer
@@ -31,7 +32,7 @@ import java.util.*
 class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
     OnQuizCompleteListener {
     private val apiManager = DiseaseApiManager()
-    private val storageManager = StorageManager("usersStats")
+    private val storageManager = StorageManager("usersScores")
     private val selectedTiles = mutableListOf<Int>()
     private var trueIds: List<Int> = emptyList()
     private var shuffledSymptoms: List<QuestionData> = emptyList()
@@ -157,6 +158,14 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
         println("SELECTED : $selectedTiles")
         println("CORRECT : $correctNums")
 
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            val uid = it.uid
+            val email = it.email
+            if (email != null && apiManager.selectedDisease != null)
+                storageManager.saveUserScoreForDisease(uid,email,
+                    apiManager.selectedDisease!!,correctNums/10f)
+        }
         val dialog = QuizResultDialogFragment.newInstance(correctNums)
         dialog.show(supportFragmentManager, "quizResultDialog")
     }

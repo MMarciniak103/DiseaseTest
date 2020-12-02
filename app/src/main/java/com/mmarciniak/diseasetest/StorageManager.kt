@@ -1,15 +1,15 @@
 package com.mmarciniak.diseasetest
 
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.mmarciniak.diseasetest.data.UserScore
 
 
 class StorageManager(databaseName: String) {
     private var database = FirebaseDatabase.getInstance()
     private var dbName: String = databaseName
 
-    public fun saveUserScoreForDisease(userName: String, disease: String, score: Float) {
+    fun saveUserScoreForDisease(userId: String, userName: String, disease: String, score: Float) {
         var dbRef = database.getReference(dbName)
-        dbRef.child(userName)
+        dbRef.child(userId).setValue(UserScore(userName, disease, score))
     }
 }
