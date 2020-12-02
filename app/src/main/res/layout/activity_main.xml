@@ -67,11 +67,12 @@
             android:src="@drawable/info"
             app:tint="@android:color/white" />
         <Button
+            android:id="@+id/stats_btn"
             style="@style/AppTheme.RoundedCornerMaterialButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:text="Info"
+            android:text="Statistics"
             android:backgroundTint="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textSize="30sp" />

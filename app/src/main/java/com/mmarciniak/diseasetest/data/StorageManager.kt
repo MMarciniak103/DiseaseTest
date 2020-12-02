@@ -10,6 +10,8 @@ class StorageManager() {
     private lateinit var dbRef: DatabaseReference
     private val userScores = mutableListOf<UserScore>()
 
+    private val storageListeners = mutableListOf<StorageListener<UserScore>>()
+
     constructor(databaseName: String) : this() {
         val database = FirebaseDatabase.getInstance()
         dbName = databaseName
@@ -25,7 +27,7 @@ class StorageManager() {
                         userScores.add(UserScore(userName,diseaseName,score))
                     }
                 }
-
+                storageListeners.forEach{ storageListener -> storageListener.readData(userScores)}
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -34,6 +36,9 @@ class StorageManager() {
         })
     }
 
+    fun registerListener(listener: StorageListener<UserScore>){
+        storageListeners.add(listener)
+    }
 
     fun saveUserScoreForDisease(userId: String, userName: String, disease: String, score: Double) {
         val sdf = SimpleDateFormat("dd-M-yyyy hh:mm:ss")
