@@ -31,6 +31,7 @@ import java.util.*
 class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
     OnQuizCompleteListener {
     private val apiManager = DiseaseApiManager()
+    private val storageManager = StorageManager("usersStats")
     private val selectedTiles = mutableListOf<Int>()
     private var trueIds: List<Int> = emptyList()
     private var shuffledSymptoms: List<QuestionData> = emptyList()
