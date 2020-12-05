@@ -24,13 +24,14 @@ class StatsActivity : AppCompatActivity(), StorageListener<UserScore> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_stats)
+        setContentView(R.layout.loading_screen)
         storageManager.registerListener(this)
 
 
     }
 
     override fun readData(data: List<UserScore>) {
+        setContentView(R.layout.activity_stats)
         var bestScore = UserScore("default","no data",0.0)
         var worstScore = UserScore("default","no data",1.0)
 
