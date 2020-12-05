@@ -6,4 +6,5 @@
     <color name="pastelBlue">#3B88C3</color>
     <color name="correctAnswer">#01DB19</color>
     <color name="wrongAnswer">#D90000</color>
+    <color name="defaultStroke">#07ED76</color>
 </resources>

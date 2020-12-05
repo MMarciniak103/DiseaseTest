@@ -111,6 +111,7 @@ class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
             } else {
                 // else if it was unselected -> select
                 llayout.setBackgroundResource(R.drawable.border)
+                changeStrokeColor(llayout, getColor(R.color.defaultStroke))
                 selectedTiles.add(symptoms[i].id)
             }
             println("SELECTED TILES $selectedTiles")
