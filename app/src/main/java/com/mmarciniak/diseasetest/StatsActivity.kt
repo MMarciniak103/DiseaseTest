@@ -1,9 +1,7 @@
 package com.mmarciniak.diseasetest
 
 import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -11,12 +9,9 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.appcompat.app.AppCompatActivity
-import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.mmarciniak.diseasetest.data.StorageListener
 import com.mmarciniak.diseasetest.data.StorageManager
 import com.mmarciniak.diseasetest.data.UserScore
-import com.mmarciniak.diseasetest.fragments.DiseaseInfoDialogFragment
 import com.mmarciniak.diseasetest.fragments.datavisualization.LineChartFragment
 import com.mmarciniak.diseasetest.fragments.datavisualization.OnGraphClosedListener
 import com.mmarciniak.diseasetest.fragments.datavisualization.PieChartFragment
@@ -25,16 +20,18 @@ import kotlinx.android.synthetic.main.activity_stats.*
 
 class StatsActivity : AppCompatActivity(), StorageListener<UserScore> , OnGraphClosedListener {
     private val storageManager = StorageManager("usersScores")
-
+    private val loadingDialog = LoadingDialog(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.loading_screen)
+        setContentView(R.layout.empty_background)
         storageManager.registerListener(this)
 
+        loadingDialog.startLoadingDialog()
 
     }
 
     override fun readData(data: List<UserScore>) {
+        loadingDialog.dismissDialog()
         setContentView(R.layout.activity_stats)
         var bestScore = UserScore("default","no data",0.0,"")
         var worstScore = UserScore("default","no data",1.0,"")
