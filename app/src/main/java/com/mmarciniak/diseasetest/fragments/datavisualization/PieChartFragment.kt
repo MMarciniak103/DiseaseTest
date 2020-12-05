@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -14,6 +15,7 @@ import com.mmarciniak.diseasetest.R
 import com.mmarciniak.diseasetest.data.UserScore
 import kotlinx.android.synthetic.main.pie_chart_dialog.view.*
 import java.util.*
+
 
 class PieChartFragment : DialogFragment() {
     private lateinit var pieData: ArrayList<UserScore>
@@ -66,7 +68,6 @@ class PieChartFragment : DialogFragment() {
         pieDataSet.valueTextColor = Color.BLACK
         pieDataSet.valueTextSize = 12f
 
-
         val pieData = PieData(pieDataSet)
         rootView.pie_chart.data = pieData
         rootView.pie_chart.legend.isEnabled = false
@@ -76,6 +77,7 @@ class PieChartFragment : DialogFragment() {
         rootView.pie_chart.centerText = "No. diseases encountered"
         rootView.pie_chart.animate()
     }
+
 
     companion object{
         private const val scoresKey = "scores"
