@@ -1,33 +1,34 @@
 package com.mmarciniak.diseasetest.fragments.datavisualization
 
-import android.content.pm.ActivityInfo
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.mmarciniak.diseasetest.R
 import com.mmarciniak.diseasetest.data.UserScore
+import kotlinx.android.synthetic.main.disease_description_dialog.view.*
 import kotlinx.android.synthetic.main.line_chart_dialog.view.*
+import kotlinx.android.synthetic.main.pie_chart_dialog.view.*
 import kotlinx.android.synthetic.main.pie_chart_dialog.view.cancel_button
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 class LineChartFragment : DialogFragment() {
     private lateinit var lineData: ArrayList<UserScore>
+    private lateinit var mListener: OnGraphClosedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,7 @@ class LineChartFragment : DialogFragment() {
         populateLineChart(lineData,rootView)
 
         rootView.cancel_button.setOnClickListener{
+            mListener.onComplete()
             dismiss()
         }
 
@@ -60,6 +62,17 @@ class LineChartFragment : DialogFragment() {
             val width = ViewGroup.LayoutParams.MATCH_PARENT
             val height = ViewGroup.LayoutParams.MATCH_PARENT
             dialog.window!!.setLayout(width, height)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            mListener = activity as OnGraphClosedListener
+        }
+        catch (e: ClassCastException)
+        {
+            throw ClassCastException(activity.toString() + " must implement OnGraphClosedListener")
         }
     }
 
@@ -82,15 +95,28 @@ class LineChartFragment : DialogFragment() {
 
         val lineDataSet = LineDataSet(lineEntries, "LineChart Data")
         lineDataSet.colors = ColorTemplate.COLORFUL_COLORS.asList()
-        lineDataSet.valueTextColor = Color.BLACK
+        lineDataSet.valueTextColor = Color.WHITE
         lineDataSet.valueTextSize = 18f
+        lineDataSet.setDrawFilled(true)
+        val fillGradient = ContextCompat.getDrawable(requireContext(), R.drawable.fade_color)
+        lineDataSet.fillDrawable = fillGradient
+
 
         val lineData = LineData(lineDataSet)
-
         rootView.line_chart.data = lineData
-        var xAxis = rootView.line_chart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
+        rootView.line_chart.legend.isEnabled = false
+        rootView.line_chart.description.isEnabled = false
+
+        val xAxis = rootView.line_chart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = MyAxisValueFormatter()
+        xAxis.textColor =  resources.getColor(R.color.white);
+        xAxis.axisLineColor = resources.getColor(R.color.white);
+
+        rootView.line_chart.axisLeft.textColor = resources.getColor(R.color.white);
+        rootView.line_chart.axisLeft.axisLineColor = resources.getColor(R.color.white);
+
+        rootView.line_chart.animate()
     }
 
     private class MyAxisValueFormatter : ValueFormatter() {

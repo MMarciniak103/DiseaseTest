@@ -18,11 +18,12 @@ import com.mmarciniak.diseasetest.data.StorageManager
 import com.mmarciniak.diseasetest.data.UserScore
 import com.mmarciniak.diseasetest.fragments.DiseaseInfoDialogFragment
 import com.mmarciniak.diseasetest.fragments.datavisualization.LineChartFragment
+import com.mmarciniak.diseasetest.fragments.datavisualization.OnGraphClosedListener
 import com.mmarciniak.diseasetest.fragments.datavisualization.PieChartFragment
 import kotlinx.android.synthetic.main.activity_stats.*
 
 
-class StatsActivity : AppCompatActivity(), StorageListener<UserScore> {
+class StatsActivity : AppCompatActivity(), StorageListener<UserScore> , OnGraphClosedListener {
     private val storageManager = StorageManager("usersScores")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +77,11 @@ class StatsActivity : AppCompatActivity(), StorageListener<UserScore> {
         }
         bestScoreInput.setSpan(ForegroundColorSpan(resources.getColor(colorId)), 0, bestScoreInput.length, 0)
         return bestScoreInput
+    }
+
+    override fun onComplete() {
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
     }
 
 
