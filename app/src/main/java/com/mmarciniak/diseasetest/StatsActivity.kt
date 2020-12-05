@@ -67,6 +67,8 @@ class StatsActivity : AppCompatActivity(), StorageListener<UserScore> , OnGraphC
         builder2.append(prepareTextInput("${worstScore.diseaseName} - ${worstScore.score*100}%",true,R.color.wrongAnswer))
         worst_score_tv.text = builder2
 
+        val numLabelText = "Total number of taken tests:\n${data.count()}"
+        num_tests_tv.text = numLabelText
     }
 
     private fun prepareTextInput(text: String, boldStyle: Boolean = false,colorId: Int): SpannableString {
