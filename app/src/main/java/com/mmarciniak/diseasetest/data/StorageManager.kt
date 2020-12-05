@@ -22,10 +22,11 @@ class StorageManager() {
                 for(user in dataSnapshot.children)
                 {
                     for(scoreDate in user.children) {
+                        val date: String  = scoreDate.key.toString().substring(0,10)
                         val userName: String = scoreDate.child("userName").value as String
                         val diseaseName: String = scoreDate.child("diseaseName").value as String
                         val score: Double = scoreDate.child("score").value as Double
-                        userScores.add(UserScore(userName,diseaseName,score))
+                        userScores.add(UserScore(userName,diseaseName,score,date))
                     }
                 }
                 storageListeners.forEach{ storageListener -> storageListener.readData(userScores)}
@@ -44,7 +45,7 @@ class StorageManager() {
     fun saveUserScoreForDisease(userId: String, userName: String, disease: String, score: Double) {
         val sdf = SimpleDateFormat("dd-M-yyyy hh:mm:ss")
         val currentDate = sdf.format(Date())
-        dbRef.child(userId).child(currentDate).setValue(UserScore(userName, disease, score))
+        dbRef.child(userId).child(currentDate).setValue(UserScore(userName, disease, score,currentDate))
     }
 
 }

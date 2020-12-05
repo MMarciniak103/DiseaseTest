@@ -1,7 +1,9 @@
 package com.mmarciniak.diseasetest
 
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -15,6 +17,7 @@ import com.mmarciniak.diseasetest.data.StorageListener
 import com.mmarciniak.diseasetest.data.StorageManager
 import com.mmarciniak.diseasetest.data.UserScore
 import com.mmarciniak.diseasetest.fragments.DiseaseInfoDialogFragment
+import com.mmarciniak.diseasetest.fragments.datavisualization.LineChartFragment
 import com.mmarciniak.diseasetest.fragments.datavisualization.PieChartFragment
 import kotlinx.android.synthetic.main.activity_stats.*
 
@@ -32,12 +35,18 @@ class StatsActivity : AppCompatActivity(), StorageListener<UserScore> {
 
     override fun readData(data: List<UserScore>) {
         setContentView(R.layout.activity_stats)
-        var bestScore = UserScore("default","no data",0.0)
-        var worstScore = UserScore("default","no data",1.0)
+        var bestScore = UserScore("default","no data",0.0,"")
+        var worstScore = UserScore("default","no data",1.0,"")
 
         pie_chart_button.setOnClickListener{
             val pieChartDialog = PieChartFragment.newInstance(ArrayList(data))
             pieChartDialog.show(supportFragmentManager, "pieChartDialog")
+        }
+
+        line_chart_button.setOnClickListener{
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+            val lineChartDialog = LineChartFragment.newInstance(ArrayList(data))
+            lineChartDialog.show(supportFragmentManager,"lineChartDialog")
         }
 
         data.forEach { userScore ->

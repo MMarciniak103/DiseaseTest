@@ -3,11 +3,13 @@ package com.mmarciniak.diseasetest.data
 import android.os.Parcel
 import android.os.Parcelable
 
-data class UserScore(val userName: String, val diseaseName: String,val score: Double) : Parcelable {
+data class UserScore(val userName: String, val diseaseName: String,val score: Double,val date: String) : Parcelable {
+
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readDouble()
+        parcel.readDouble(),
+        parcel.readString()!!
     ) {
     }
 
@@ -15,6 +17,7 @@ data class UserScore(val userName: String, val diseaseName: String,val score: Do
         parcel.writeString(userName)
         parcel.writeString(diseaseName)
         parcel.writeDouble(score)
+        parcel.writeString(date)
     }
 
     override fun describeContents(): Int {

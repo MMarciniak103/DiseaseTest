@@ -71,5 +71,25 @@
                 android:background="@drawable/pie_chart"
                 />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Click below for line chart"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@android:color/secondary_text_light"/>
+            <ImageButton
+                android:id="@+id/line_chart_button"
+                android:layout_margin="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="#00D3DD"
+                android:background="@drawable/chart"
+                />
+
         </LinearLayout>
 </LinearLayout>
