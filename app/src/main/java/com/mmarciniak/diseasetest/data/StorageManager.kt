@@ -18,6 +18,7 @@ class StorageManager() {
         dbRef = database.getReference(dbName)
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                userScores.clear()
                 for(user in dataSnapshot.children)
                 {
                     for(scoreDate in user.children) {
