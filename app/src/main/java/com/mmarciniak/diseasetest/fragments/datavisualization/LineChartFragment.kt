@@ -108,6 +108,7 @@ class LineChartFragment : DialogFragment() {
         rootView.line_chart.description.isEnabled = false
 
         val xAxis = rootView.line_chart.xAxis
+        xAxis.labelCount = lineEntries.size
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = MyAxisValueFormatter()
         xAxis.textColor =  resources.getColor(R.color.white);

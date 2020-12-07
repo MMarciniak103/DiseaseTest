@@ -25,7 +25,8 @@ class StorageManager() {
                         val date: String  = scoreDate.key.toString().substring(0,10)
                         val userName: String = scoreDate.child("userName").value as String
                         val diseaseName: String = scoreDate.child("diseaseName").value as String
-                        val score: Double = scoreDate.child("score").value as Double
+                        val scoreL: Number = scoreDate.child("score").value as Number
+                        val score = scoreL.toDouble()
                         userScores.add(UserScore(userName,diseaseName,score,date))
                     }
                 }
