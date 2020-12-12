@@ -31,7 +31,7 @@ async def get_all_symptoms():
 
 @app.get("/disease")
 async def get_disease_symptoms(disease: str):
-    return {"symptoms": list(diseases_symptoms[disease])}
+    return list(diseases_symptoms[disease])
 
 @app.get("/question")
 async def get_quiz_symptoms(disease : str):
