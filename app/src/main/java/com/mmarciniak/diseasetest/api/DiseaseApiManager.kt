@@ -31,7 +31,6 @@ class DiseaseApiManager : ApiManager() {
         val url = baseUrl + "question?disease=$diseaseName"
         fun onResponse(call: Call, response: Response) {
             val body = response.body?.string()
-            println(body)
             val questionData = gson.fromJson(body, QuestionDataContainer::class.java)
             callback(questionData)
         }
@@ -46,7 +45,6 @@ class DiseaseApiManager : ApiManager() {
         val url = baseUrl + "disease/description?disease=$diseaseName"
         fun onResponse(call: Call, response: Response) {
             val body = response.body?.string()
-            println(body)
             val diseaseDescription = gson.fromJson(body, String::class.java)
             callback(diseaseDescription,diseaseName)
         }
@@ -54,5 +52,19 @@ class DiseaseApiManager : ApiManager() {
             println("Failed to execute request: " + e.printStackTrace())
         }
         createGetRequest(url, ::onResponse, ::onFailure)
+    }
+
+    fun getDiseaseSymptoms(callback: (m: Array<String>) -> Unit,diseaseName: String){
+        val url = baseUrl + "disease?disease=$diseaseName"
+        fun onResponse(call: Call, response: Response) {
+            val body = response.body?.string()
+            println(body)
+            val symptoms = gson.fromJson(body, Array<String>::class.java)
+            callback(symptoms)
+        }
+        fun onFailure(call: Call, e: IOException) {
+            println("Failed to execute request: " + e.printStackTrace())
+        }
+        createGetRequest(url,::onResponse,::onFailure)
     }
 }
