@@ -1,5 +1,6 @@
 package com.mmarciniak.diseasetest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -72,15 +73,22 @@ class Test2Activity : AppCompatActivity(), OnQuizCompleteListener {
     }
 
     override fun onComplete(reset: Boolean) {
-        if (!reset) {
-            disease_input.text.clear()
-            try {
-                apiManager.getListOfDiseases(::chooseRandomDisease)
-            } catch (e: IOException) {
-                println(e.printStackTrace())
-            }
+        disease_input.text.clear()
+        try {
+            apiManager.getListOfDiseases(::chooseRandomDisease)
+        } catch (e: IOException) {
+            println(e.printStackTrace())
         }
+        if (reset)
+            apiManager.selectedDisease?.let { disease ->
+                val intent = Intent(this, WebViewActivity::class.java)
+                intent.putExtra(urlKey, disease)
+                startActivity(intent)
+            }
 
     }
 
+    companion object {
+        const val urlKey = "urlKey";
+    }
 }

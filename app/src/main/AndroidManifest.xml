@@ -11,8 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Test2Activity"
+        <activity android:name=".WebViewActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Test2Activity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".StatsActivity"
             android:screenOrientation="portrait" />

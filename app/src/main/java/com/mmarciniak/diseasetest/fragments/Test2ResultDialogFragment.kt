@@ -32,6 +32,8 @@ class Test2ResultDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.test2_result_dialog, container, false)
+        dialog?.setCancelable(false);
+
         if (match) {
             rootView.test2_result_label.text = "You were right"
         } else {

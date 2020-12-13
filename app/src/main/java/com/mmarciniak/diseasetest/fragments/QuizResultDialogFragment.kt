@@ -29,6 +29,9 @@ class QuizResultDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.quiz_result_dialog, container, false)
+        dialog?.setCancelable(false);
+
+
         val quizStatusText = "Score: $scoreValue/10"
         rootView.quiz_result_label.text = quizStatusText
 
