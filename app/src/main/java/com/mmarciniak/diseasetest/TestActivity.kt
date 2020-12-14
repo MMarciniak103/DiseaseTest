@@ -26,8 +26,7 @@ import java.io.IOException
 import java.util.*
 
 
-class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener,
-    OnQuizCompleteListener {
+class TestActivity : AppCompatActivity(), DialogInterface.OnDismissListener, OnQuizCompleteListener {
     private val apiManager = DiseaseApiManager()
     private val storageManager = StorageManager("usersScores")
     private val selectedTiles = mutableListOf<Int>()

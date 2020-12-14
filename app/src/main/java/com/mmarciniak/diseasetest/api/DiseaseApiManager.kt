@@ -1,10 +1,12 @@
 package com.mmarciniak.diseasetest.api
 
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.mmarciniak.diseasetest.data.QuestionDataContainer
 import okhttp3.*
 import java.io.IOException
+import kotlin.coroutines.coroutineContext
 
 class DiseaseApiManager : ApiManager() {
     private val baseUrl = "http://192.168.0.196/"
@@ -20,7 +22,6 @@ class DiseaseApiManager : ApiManager() {
             val diseases = gson.fromJson(body, Array<String>::class.java)
             callback(diseases)
         }
-
         fun onFailure(call: Call, e: IOException) {
             println("Failed to execute request: " + e.printStackTrace())
         }

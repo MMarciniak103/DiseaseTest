@@ -1,5 +1,7 @@
 package com.mmarciniak.diseasetest.data
 
+import android.util.Log
+import android.widget.Toast
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,7 +36,7 @@ class StorageManager() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
+                Log.e("ERROR",error.message)
             }
         })
     }
